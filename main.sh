@@ -22,7 +22,7 @@ else
 fi
 
 # Get the download URL for the latest release firmware
-zip_url=$(curl -s https://mirror.codebucket.de/yaap/guacamoles/ | grep -Eo 'href="[^\"]*"' | sed -e 's/^href="//' -e 's/"$//' | grep 'YAAP-[0-9]*-Tripoli-guacamoles-[0-9]*\.zip' | sed -e 's/^/https:\/\/mirror.codebucket.de/' -e 's/\.sha256sum$//' | sort -V | tail -n1)
+zip_url=$(curl -s https://mirror.codebucket.de/yaap/guacamoles/ | grep -Eo 'href="[^\"]*"' | sed -e 's/^href="//' -e 's/"$//' | grep 'YAAP-[0-9]*-Urshanabi-guacamoles-[0-9]*\.zip' | sed -e 's/^/https:\/\/mirror.codebucket.de/' -e 's/\.sha256sum$//' | sort -V | tail -n1)
 zip_file=$(basename $zip_url)
 if ls | grep -q "$zip_file"; then
     echo "Your firmware is up to date"
@@ -56,3 +56,4 @@ else
     fastboot flash vendor $folder/vendor.img
     fastboot reboot
 fi
+rm -rf payload.bin
